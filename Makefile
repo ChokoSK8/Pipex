@@ -1,8 +1,8 @@
-NAME	= pipex.a
+NAME	= pipex
 
-SRC		= *.c
+SRCS	= *.c
 
-OBJ		= $(SRC:.c=.o)
+OBJS	= $(SRC:.c=.o)
 
 FLAGS	= -Wall -Werror -Wextra
 
@@ -16,8 +16,7 @@ INC		= -I includes/
 			cc $(FLAGS) $(INC) -o $@ -c $?
 
 $(NAME):
-		clang $(FLAGS) -c $(SRCS)
-		ar rc $(NAME) *.o
+		gcc $(FLAGS) $(SRCS) -o $(NAME)
 
 clean:
 		$(RM) *.o
