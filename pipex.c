@@ -124,67 +124,96 @@ char	*get_file_in_buf(char *av)
 	return (buf);
 }
 
+void	ft_fils(int out, char **newargv, char **newenviron)
+{
+	if (dup2(out, STDOUT_FILENO) == -1)
+	{
+		perror("La fonction dup2 a echoue");
+		exit(EXIT_FAILURE);
+	}
+	if (dup2(out, STDERR_FILENO) == -1)
+	{
+		perror("La fonction dup2 a echoue");
+		exit(EXIT_FAILURE);
+	}
+	if (close(out) == -1)
+	{
+		perror("La fonction close a echoue");
+		exit(EXIT_FAILURE);
+	}
+	if (execve(newargv[0], newargv, newenviron) == -1)
+	{
+		perror("La fonction execve a echoue");
+		exit(EXIT_FAILURE);
+	}
+	exit(EXIT_FAILURE);
+}
+
 int	main(int ac, char **av)
 {
-	int	fd;
 	char	*pathname;
-	int	status;
 	char	***newargv;
 	char	*newenviron[] = { NULL };
 	int	filedes[2];
-	char	buf[100];
 	pid_t	child_pid;
-//	char	*file1;
-	int	fw;
 
 	if (ac < 3)
 		return 0;
-	fd = open(av[1], O_RDONLY);	
-	if (fd < 1)
+	if (!(pathname = malloc(strlen("/usr/bin/"))))
 		return 0;
-	if (!(pathname = malloc(5 + strlen(av[2]) + 1)))
-		return 0;
-	strcpy(pathname, "/bin/");
+	strcpy(pathname, "/usr/bin/");
 
 	//init newargv
 	if (!(newargv = malloc(sizeof(char **) * 2)))
 		return (0);
 	newargv[0] = ft_init_newargvs(av, pathname, 0);
-        print_newargv(newargv[0]);
+	print_newargv(newargv[0]);
 
-//	if (!(file1 = get_file_in_buf(av[1])))
-//		return (0);
-
-	if ((child_pid = fork()) == -1)
-	{
-		perror("erreur avec fork");
-		return (0);
-	}
-	
 	if (pipe(filedes) == -1)
 	{
 		perror("erreur ouverture pipe");
 		return (0);
 	}
 
+	if ((child_pid = fork()) == -1)
+	{
+		perror("erreur avec fork");
+		return (0);
+	}
+
 	if (child_pid == 0)
 	{
-		close(filedes[0]);
-		dup2(filedes[1], 1);
-		execve(newargv[0][0], newargv[0], newenviron);
-		wait(&status);
+		if (close(filedes[0] == -1))
+		{
+			perror("La fonction close a echoue");
+			return (0);
+		}
+		ft_fils(filedes[1], newargv[0], newenviron);
 	}
 	else
 	{
-		close(filedes[1]);
-		int len_buf = read(filedes[0], buf, sizeof(buf));
-		fw = open("sortie.txt", O_CREAT|S_IRWXU|O_RDWR);
+		if (close(filedes[1] == -1))
+		{
+			perror("La fonction close a echoue");
+			return (0);
+		}
+		if (dup2(filedes[0], STDIN_FILENO) == -1)
+		{
+			perror("La fonction dup2 a echoue");
+			return (0);
+		}
+		if (close(filedes[0] == -1))
+		{
+			perror("La fonction close a echoue");
+			return (0);
+		}
 		newargv[1] = ft_init_newargvs(av, pathname, 1);
-        	print_newargv(newargv[1]);
-		write(fw, buf, len_buf);
-		execve(newargv[1][0], newargv[1], newenviron);
-		wait(&status);
+		newargv[1][2] = NULL;
+		if (execve("/usr/bin/wc", newargv[1], newenviron) == -1)
+		{
+			perror("La fonction execve a echoue");
+			return (0);
+		}
 	}
-	close(fd);
 	return 1;
 }
