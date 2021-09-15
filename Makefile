@@ -15,8 +15,12 @@ INC		= -I includes/
 %.o: %.c
 			cc $(FLAGS) $(INC) -o $@ -c $?
 
-$(NAME):
-		gcc $(FLAGS) $(SRCS) -o $(NAME)
+lib:	
+	make -C Libft
+
+$(NAME):	lib
+		ranlib Libft/libft.a
+		gcc $(FLAGS) $(SRCS) -o $(NAME) Libft/libft.a
 
 clean:
 		$(RM) *.o
