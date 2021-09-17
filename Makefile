@@ -27,6 +27,7 @@ clean:
 
 fclean:		clean
 			$(RM) $(NAME)
+			make fclean -C Libft
 
 re:		fclean all
 
