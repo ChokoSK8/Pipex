@@ -39,11 +39,11 @@ int	get_n_av(int pt_av, char **av, int ac)
 	while (loop && n_av + pt_av < ac - 1)
 	{
 		n_av++;
-		path = malloc(ft_strlen("/usr/bin/") + strlen(av[pt_av + n_av]));
+		path = malloc(ft_strlen("/usr/bin/") + ft_strlen(av[pt_av + n_av]) + 1);
 		if (!path)
 			return (0);
-		strcpy(path, "/usr/bin/");
-		strcat(path, av[pt_av + n_av]);
+		ft_strcpy(path, "/usr/bin/");
+		ft_strcat(path, av[pt_av + n_av]);
 		if (!access(path, X_OK))
 			loop = 0;
 		free(path);
@@ -57,10 +57,10 @@ char	*get_last_param(char **av, int pt_av)
 
 	if (!av[pt_av])
 	{
-		param = malloc(strlen(av[pt_av - 1]));
+		param = malloc(ft_strlen(av[pt_av - 1]) + 1);
 		if (!param)
 			return (0);
-		strcpy(param, av[pt_av - 1]);
+		ft_strcpy(param, av[pt_av - 1]);
 	}
 	else
 		return (0);
@@ -71,11 +71,11 @@ char	*assign_first(char **av, int pt_av)
 {
 	char	*first;
 
-	first = malloc(strlen("/usr/bin/") + strlen(av[pt_av]));
+	first = malloc(ft_strlen("/usr/bin/") + ft_strlen(av[pt_av]) + 1);
 	if (!first)
 		return (0);
-	strcpy(first, "/usr/bin/");
-	strcat(first, av[pt_av]);
+	ft_strcpy(first, "/usr/bin/");
+	ft_strcat(first, av[pt_av]);
 	return (first);
 }
 
@@ -90,19 +90,19 @@ char	**assign_param(char **newargv, char **av, int n_av, int pt_av)
 	pt_av++;
 	while (n_av--)
 	{
-		newargv[count] = malloc(sizeof(strlen(av[pt_av])));
+		newargv[count] = malloc(sizeof(ft_strlen(av[pt_av]) + 1));
 		if (!newargv[count])
 			return (0);
-		strcpy(newargv[count], av[pt_av]);
+		ft_strcpy(newargv[count], av[pt_av]);
 		count++;
 		pt_av++;
 	}
 	if (pt_av == 2 + count)
 	{
-		newargv[count] = malloc(strlen(av[1]));
+		newargv[count] = malloc(ft_strlen(av[1]) + 1);
 		if (!newargv[count])
 			return (0);
-		strcpy(newargv[count++], av[1]);
+		ft_strcpy(newargv[count++], av[1]);
 	}
 	newargv[count] = 0;
 	return (newargv);

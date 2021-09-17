@@ -29,5 +29,7 @@ int	main(int ac, char **av)
 	if (child_pid == 0)
 		ft_cmd_2(fds, newargv[1]);
 	ft_write_in_file(fds, av, ac);
+	free(newargv);
+	free(fds);
 	return (1);
 }

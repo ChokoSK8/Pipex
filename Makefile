@@ -16,7 +16,7 @@ INC		= -I includes/
 			cc $(FLAGS) $(INC) -o $@ -c $?
 
 lib:	
-	make -C Libft
+	make re -C Libft
 
 $(NAME):	lib
 		ranlib Libft/libft.a
