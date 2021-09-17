@@ -43,7 +43,7 @@ int	main(int ac, char **av)
 	if (child_pid == -1)
 		return (0);
 	if (child_pid == 0)
-		ft_cmd_2(fds, newargv[n_newargv]);
+		ft_cmd_2(fds, newargv[n_newargv], n_newargv);
 	ft_write_in_file(fds, av, ac);
 	free(newargv);
 	free(fds);
