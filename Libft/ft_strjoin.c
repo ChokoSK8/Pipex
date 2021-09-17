@@ -24,7 +24,8 @@ char	*ft_strjoin(char const *s1, const char *s2)
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	strjoin_len = s1_len + s2_len + 1;
-	if (!(strjoin = malloc(sizeof(char) * strjoin_len)))
+	strjoin = malloc(sizeof(char) * strjoin_len);
+	if (!strjoin)
 		return (NULL);
 	while (counter < s1_len)
 	{

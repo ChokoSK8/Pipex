@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-size_t		ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	size_t strlen;
+	size_t	strlen;
 
 	if (!s)
 		return (-1);

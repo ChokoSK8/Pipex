@@ -14,6 +14,8 @@ int	main(int ac, char **av)
 	int		**fds;
 	char	***newargv;
 
+	if (!check_error(av, ac))
+		return (0);
 	newargv = ft_init_newargvs(av, ac);
 	if (!newargv)
 		return (0);

@@ -35,6 +35,7 @@ int	ft_atoi(const char *str)
 		res += *str - '0';
 		str++;
 	}
-	n_minus ? res *= -1 : res;
+	if (n_minus)
+		res *= -1;
 	return (res);
 }

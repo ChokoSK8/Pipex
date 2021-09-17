@@ -20,7 +20,8 @@ void	*ft_calloc(size_t count, size_t size)
 
 	lenght = size * count;
 	counter = lenght;
-	if (!(mal = malloc(lenght)))
+	mal = malloc(lenght);
+	if (!mal)
 		return (0);
 	while (lenght-- > 0)
 		*mal++ = 0;

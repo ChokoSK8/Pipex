@@ -30,4 +30,10 @@ void	ft_cmd_1(int **fds, char **newargv);
 
 void	ft_cmd_2(int **fds, char **newargv);
 
+int	check_error(char **av, int ac);
+
+int	check_file(char **av, int ac);
+
+int	get_n_cmd(char **av, int ac);
+
 #endif

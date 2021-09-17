@@ -81,8 +81,6 @@ void				ft_putnbr_fd(long long int n, int fd);
 
 void				ft_putstr_fd(char *s, int fd);
 
-char				**ft_split(char const *s, char c);
-
 char				*ft_strchr(const char *s, int c);
 
 char				*ft_strdup(const char *s1, int len);
