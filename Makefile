@@ -6,6 +6,8 @@ OBJS	= $(SRC:.c=.o)
 
 FLAGS	= -Wall -Werror -Wextra
 
+BONUS:	$(BONUS)
+
 all:	$(NAME)
 
 RM		= rm -rf

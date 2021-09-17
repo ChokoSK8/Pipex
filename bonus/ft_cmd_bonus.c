@@ -30,8 +30,6 @@ void	ft_cmd_1(int **fds, char **newargv, int n_newargv)
 
 void	ft_cmd_2(int **fds, char **newargv, int n_newargv)
 {
-	ft_close_fd(fds[0][1]);
-	ft_close_fd(fds[1][0]);
 	ft_close_fds(fds, n_newargv);
 	ft_dup2(fds[n_newargv - 1][0], STDIN_FILENO);
 	ft_dup2(fds[n_newargv][1], STDOUT_FILENO);
@@ -52,8 +50,8 @@ void	ft_write_in_file(int **fds, char **av, int ac, int n_newargv)
 	int		outfd;
 
 	ft_close_all_execpt(fds, n_newargv);
-	ret = read(fds[1][0], buf, 100);
-	ft_close_fd(fds[1][0]);
+	ret = read(fds[n_newargv][0], buf, 100);
+	ft_close_fd(fds[n_newargv][0]);
 	buf[ret] = 0;
 	outfd = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (outfd < 0)
