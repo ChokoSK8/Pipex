@@ -24,7 +24,7 @@ int		get_n_av(int pt_av, char **av, int ac);
 
 char	***ft_init_newargvs(char **av, int ac);
 
-void	ft_write_in_file(int **fds, char **av, int ac);
+int		ft_write_in_file(int **fds, char **av, int ac);
 
 void	ft_cmd_1(int **fds, char **newargv);
 
@@ -36,4 +36,5 @@ int		check_file(char **av, int ac);
 
 int		get_n_cmd(char **av, int ac);
 
+char	*get_str_file(int fd);
 #endif

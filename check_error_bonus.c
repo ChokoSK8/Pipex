@@ -1,35 +1,27 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include "pipex_bonus.h"
 
-int	check_error(char **av, int ac)
+int	check_error(char **av, int ac, int len_av)
 {
 	int	n_cmd;
 
-	n_cmd = get_n_cmd(av, ac);
+	if (ac < len_av)
+		return (0);
+	n_cmd = get_n_cmd(av, ac, len_av - 2);
 	if (n_cmd < 0)
 	{
 		perror("zsh: parse error near '\\n'");
 		return (0);
 	}
-	if (n_cmd < 2)
-		return (0);
 	return (1);
 }
 
-int	get_n_cmd(char **av, int ac)
+int	get_n_cmd(char **av, int ac, int from)
 {
 	int		count;
 	int		n_cmd;
 	char	*path;
 
-	count = 2;
+	count = from;
 	n_cmd = 0;
 	while (count < ac)
 	{

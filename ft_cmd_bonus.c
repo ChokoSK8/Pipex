@@ -8,11 +8,7 @@ void	ft_cmd_n(int **fds, char **newargv, int n_newargv)
 	ft_close_fd(fds[n_newargv - 1][0]);
 	ft_close_fd(fds[n_newargv][1]);
 	if (execve(newargv[0], newargv, NULL) == -1)
-	{
-		perror("La fonction execve 2 a echoue");
-		exit(EXIT_FAILURE);
-	}
-	exit(EXIT_FAILURE);
+		perror("La fonction execve a echoue");
 }
 
 void	ft_cmd_1(int **fds, char **newargv, int n_newargv)
@@ -43,19 +39,20 @@ void	ft_cmd_2(int **fds, char **newargv, int n_newargv)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_write_in_file(int **fds, char **av, int ac, int n_newargv)
+int	ft_write_in_file(int **fds, char **av, int ac, int n_newargv)
 {
-	char	buf[100];
-	int		ret;
 	int		outfd;
+	char	*str_file;
 
 	ft_close_all_execpt(fds, n_newargv);
-	ret = read(fds[n_newargv][0], buf, 100);
+	str_file = get_str_file(fds[n_newargv][0]);
 	ft_close_fd(fds[n_newargv][0]);
-	buf[ret] = 0;
+	if (!str_file)
+		return (0);
 	outfd = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (outfd < 0)
-		exit(EXIT_FAILURE);
-	write(outfd, buf, ret);
+		return (0);
+	write(outfd, str_file, ft_strlen(str_file));
 	close(outfd);
+	return (1);
 }

@@ -1,28 +1,32 @@
 NAME	= pipex
 
-SRCS	= *.c
+SRCS	= check_error.c init_newargv.c utils.c pipex.c ft_close.c ft_cmd.c
 
-OBJS	= $(SRC:.c=.o)
+SRCS_B	= check_error_bonus.c init_newargv_bonus.c init_newargv_2_bonus.c pipex_bonus.c ft_close_bonus.c ft_cmd_bonus.c make_cmd_bonus.c make_heredoc_cmd_bonus.c utils_bonus.c
+
+OBJS	= $(SRCS:.c=.o)
+
+OBJS_B	= $(SRCS_B:.c=.o)
 
 FLAGS	= -Wall -Werror -Wextra
 
-BONUS:	$(BONUS)
+%.o: %.c
+			cc $(FLAGS) $(INC) -o $@ -c $?
 
 all:	$(NAME)
+
+bonus:		lib $(OBJS_B)
+		gcc $(FLAGS) -no-pie $(OBJS_B) -o $(NAME) Libft/libft.a
 
 RM		= rm -rf
 
 INC		= -I includes/
 
-%.o: %.c
-			cc $(FLAGS) $(INC) -o $@ -c $?
-
 lib:	
 	make re -C Libft
 
-$(NAME):	lib
-		ranlib Libft/libft.a
-		gcc $(FLAGS) $(SRCS) -o $(NAME) Libft/libft.a
+$(NAME):	lib $(OBJS)
+		gcc $(FLAGS) $(OBJS) -o $(NAME) Libft/libft.a
 
 clean:
 		$(RM) *.o

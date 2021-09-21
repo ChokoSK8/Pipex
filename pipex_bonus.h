@@ -5,7 +5,9 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdarg.h>
-# include "../Libft/libft.h"
+# include <stdio.h>
+# include <unistd.h>
+# include "Libft/libft.h"
 
 void	ft_dup2(int newfd, int oldfd);
 
@@ -23,17 +25,17 @@ int		get_n_av(int pt_av, char **av, int ac);
 
 char	***ft_init_newargvs_b(char **av, int ac, int n_cmd);
 
-void	ft_write_in_file(int **fds, char **av, int ac, int n_newargv);
+int		ft_write_in_file(int **fds, char **av, int ac, int n_newargv);
 
 void	ft_cmd_1(int **fds, char **newargv, int n_newargv);
 
 void	ft_cmd_2(int **fds, char **newargv, int n_newargv);
 
-int		check_error(char **av, int ac);
+int		check_error(char **av, int ac, int len_av);
 
 int		check_file(char **av, int ac);
 
-int		get_n_cmd(char **av, int ac);
+int		get_n_cmd(char **av, int ac, int from);
 
 void	print_newargv(char ***newargv, int n_cmd);
 
@@ -48,4 +50,22 @@ void	ft_cmd_n(int **fds, char **newargv, int n_newargv);
 int		loop_cmd(int n_cmd, int n_newargv, char ***newargv, int **fds);
 
 int		make_cmds(int **fds, int n_cmd, char **av, int ac);
+
+int		main_2(int ac, char **av);
+
+char	*get_heredoc(char **av);
+
+char	**assign_param_2(char **newargv, char **av, int n_av, int pt_av);
+
+char	***init_nw_2(char **av, int ac);
+
+int		put_in_file(char *heredoc);
+
+void	ft_write_in_file_2(int **fds, char **av, int ac, int n_newargv);
+
+int		make_heredoc_cmd(int **fds, char ***newargv, char **av, int ac);
+
+int		main_2(int ac, char **av);
+
+char	*get_str_file(int fd);
 #endif
