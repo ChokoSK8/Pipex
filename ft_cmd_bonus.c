@@ -39,6 +39,30 @@ void	ft_cmd_2(int **fds, char **newargv, int n_newargv)
 	exit(EXIT_FAILURE);
 }
 
+int	get_outfd(char *file)
+{
+	int	outfd;
+
+	if (!access(file, F_OK))
+	{
+		if (!access(file, W_OK))
+		{
+			outfd = open(file, O_TRUNC | O_WRONLY);
+		}
+		else
+		{
+			outfd = 0;
+			perror("zsh: permission denied: outfile");
+		}
+	}
+	else
+	{
+		outfd = open(file, O_CREAT | O_RDWR | O_TRUNC,
+				S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
+	}
+	return (outfd);
+}
+
 int	ft_write_in_file(int **fds, char **av, int ac, int n_newargv)
 {
 	int		outfd;
@@ -49,7 +73,7 @@ int	ft_write_in_file(int **fds, char **av, int ac, int n_newargv)
 	ft_close_fd(fds[n_newargv][0]);
 	if (!str_file)
 		return (0);
-	outfd = open(av[ac - 1], O_CREAT | O_RDWR | O_TRUNC, S_IRUSR | S_IWUSR);
+	outfd = get_outfd(av[ac - 1]);
 	if (outfd < 0)
 		return (0);
 	write(outfd, str_file, ft_strlen(str_file));

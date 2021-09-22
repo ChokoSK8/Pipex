@@ -23,7 +23,7 @@ RM		= rm -rf
 INC		= -I includes/
 
 lib:	
-	make re -C Libft
+	make -C Libft
 
 $(NAME):	lib $(OBJS)
 		gcc $(FLAGS) $(OBJS) -o $(NAME) Libft/libft.a

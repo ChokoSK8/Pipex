@@ -37,4 +37,6 @@ int		check_file(char **av, int ac);
 int		get_n_cmd(char **av, int ac);
 
 char	*get_str_file(int fd);
+
+int		get_outfd(char *file);
 #endif

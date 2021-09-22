@@ -68,4 +68,6 @@ int		make_heredoc_cmd(int **fds, char ***newargv, char **av, int ac);
 int		main_2(int ac, char **av);
 
 char	*get_str_file(int fd);
+
+int		get_outfd(char *file);
 #endif

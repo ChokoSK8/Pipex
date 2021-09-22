@@ -6,6 +6,11 @@ int	check_error(char **av, int ac, int len_av)
 
 	if (ac < len_av)
 		return (0);
+	if (access(av[1], R_OK))
+	{
+		perror("Le 2e argument n'est un fichier valide");
+		return (0);
+	}
 	n_cmd = get_n_cmd(av, ac, len_av - 2);
 	if (n_cmd < 0)
 	{
