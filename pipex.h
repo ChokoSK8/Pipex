@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 18:09:28 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/06 19:29:37 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,10 @@ char	**get_new_mat_path(char **new_mat, char **mat, char *line, int matlen);
 char	**ft_add_line_path(char **mat, char *line);
 
 int		is_arg_of_cmd(char **paths, char *av, size_t av_len);
+
+char	*ft_add_one_path(char *line, int *count);
+
+char	**get_paths(char *line, int count);
+
+int		get_path_len(char *line, int count);
 #endif

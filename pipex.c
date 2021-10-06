@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:10 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 18:48:54 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/06 18:52:52 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,5 @@ int	main(int ac, char **av)
 	ft_write_in_file(fds, av, ac);
 	free_3dim_matc(newargv);
 	free_matc(paths);
-	printf("\nTest des leaks\n");
-	system("leaks pipex | grep leaked\n");
 	return (1);
 }
