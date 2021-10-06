@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:18:03 by abrun             #+#    #+#             */
-/*   Updated: 2021/09/16 10:12:20 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/06 18:14:56 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,13 @@ size_t				ft_strcat(char *dst, const char *src);
 
 size_t				ft_strcpy(char *dst, const char *src);
 
+int					ft_matlen(char **mat);
+
+void				free_matc(char **matc);
+
+void				free_mati(int **mati);
+
+void				print_matc(char **mat);
+
+void				free_3dim_matc(char ***matc);
 #endif

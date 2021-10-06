@@ -6,25 +6,26 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:36 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 13:14:06 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/06 18:28:24 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	check_error(char **av, int ac)
+int	check_error(char **av, int ac, char **paths)
 {
 	int	n_cmd;
 
+	errno = EIO;
 	if (ac < 5)
 		return (0);
-	n_cmd = get_n_cmd(av, ac);
+	n_cmd = get_n_cmd(av, ac, paths);
 	if (n_cmd < 0)
 	{
 		perror("zsh: parse error near '\\n'");
 		return (0);
 	}
-	if (n_cmd > 2)
+	if (n_cmd != 2)
 	{
 		perror("Il n'y a pas exactement 2 commandes");
 		return (0);
@@ -32,30 +33,34 @@ int	check_error(char **av, int ac)
 	return (1);
 }
 
-int	get_n_cmd(char **av, int ac)
+int	get_n_cmd(char **av, int ac, char **paths)
 {
 	int		count;
 	int		n_cmd;
-	char	*path;
+	int		c_path;
+	char	*cmd;
 
 	count = 2;
 	n_cmd = 0;
-	while (count < ac)
+	while (count < ac - 1)
 	{
-		path = malloc(ft_strlen("/usr/bin/") + strlen(av[count]) + 1);
-		if (!path)
-			return (0);
-		ft_strcpy(path, "/usr/bin/");
-		ft_strcat(path, av[count]);
-		if (!access(path, X_OK))
+		c_path = 0;
+		while (paths[c_path])
 		{
-			if (count < ac - 1)
-				n_cmd++;
-			else
-				n_cmd = -1;
+			cmd = malloc(ft_strlen(paths[c_path]) + ft_strlen(av[count]));
+			if (!cmd)
+				return (0);
+			ft_strcpy(cmd, paths[c_path]);
+			ft_strcat(cmd, av[count]);
+			if (!access(cmd, X_OK))
+			{
+					n_cmd++;
+					break ;
+			}
+			c_path++;
 		}
-		free(path);
 		count++;
 	}
+	free(cmd);
 	return (n_cmd);
 }

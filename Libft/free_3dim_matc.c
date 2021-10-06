@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free_3dim_matc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/18 12:33:42 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 16:49:57 by abrun            ###   ########.fr       */
+/*   Created: 2021/10/06 18:12:16 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 18:48:16 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	free_3dim_matc(char ***matc)
 {
-	size_t	strlen;
+	int	n;
 
-	if (!s)
-		return (-1);
-	strlen = 0;
-	while (*s++)
-		strlen++;
-	return (strlen);
+	n = 0;
+	while (matc[n])
+	{
+		free_matc(matc[n]);
+		n++;
+	}
+	free(matc);
 }

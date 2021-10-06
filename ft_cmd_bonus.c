@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:28 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 11:36:38 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/06 14:47:44 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_cmd_1(int **fds, char **newargv, int n_newargv)
 	ft_close_fd(fds[n_newargv][1]);
 	if (execve(newargv[0], newargv, NULL) == -1)
 	{
-		perror("La fonction execve 1 a echoue");
+		perror("La fonction execve a echoue");
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_FAILURE);
@@ -45,7 +45,7 @@ void	ft_cmd_2(int **fds, char **newargv, int n_newargv)
 	ft_close_fd(fds[n_newargv][1]);
 	if (execve(newargv[0], newargv, NULL) == -1)
 	{
-		perror("La fonction execve 2 a echoue");
+		perror("La fonction execve a echoue");
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_FAILURE);
