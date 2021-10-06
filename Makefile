@@ -16,7 +16,7 @@ FLAGS	= -Wall -Werror -Wextra
 all:	$(NAME)
 
 bonus:		lib $(OBJS_B)
-		gcc $(FLAGS) -no-pie $(OBJS_B) -o $(NAME) Libft/libft.a
+		gcc $(FLAGS) $(OBJS_B) -o $(NAME) Libft/libft.a
 
 RM		= rm -rf
 

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_newargv_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:44 by abrun             #+#    #+#             */
 /*   Updated: 2021/10/06 11:04:45 by abrun            ###   ########.fr       */

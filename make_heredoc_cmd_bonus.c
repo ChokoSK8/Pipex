@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   make_heredoc_cmd_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:27 by abrun             #+#    #+#             */
 /*   Updated: 2021/10/06 11:05:29 by abrun            ###   ########.fr       */

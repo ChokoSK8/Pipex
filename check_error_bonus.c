@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:57 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 11:57:20 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/06 13:17:30 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int	check_error(char **av, int ac, int len_av)
 {
 	int	n_cmd;
 
+	errno = EIO;
 	if (ac < len_av)
 	{
 		perror("zsh: parse error near '\\n'");
-		errno = ;
 		exit(EXIT_FAILURE);
 	}
 	n_cmd = get_n_cmd(av, ac, len_av - 2);
