@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cmd_bonus.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 11:04:28 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 11:36:38 by abrun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 void	ft_cmd_n(int **fds, char **newargv, int n_newargv)
@@ -51,8 +63,8 @@ int	get_outfd(char *file)
 		}
 		else
 		{
-			outfd = 0;
-			perror("zsh: permission denied: outfile");
+			outfd = -1;
+			perror("zsh: outfile");
 		}
 	}
 	else

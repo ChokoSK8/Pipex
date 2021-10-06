@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_error_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 11:03:57 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 11:57:20 by abrun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex_bonus.h"
 
 int	check_error(char **av, int ac, int len_av)
@@ -5,17 +17,16 @@ int	check_error(char **av, int ac, int len_av)
 	int	n_cmd;
 
 	if (ac < len_av)
-		return (0);
-	if (access(av[1], R_OK))
 	{
-		perror("Le 2e argument n'est un fichier valide");
-		return (0);
+		perror("zsh: parse error near '\\n'");
+		errno = ;
+		exit(EXIT_FAILURE);
 	}
 	n_cmd = get_n_cmd(av, ac, len_av - 2);
 	if (n_cmd < 0)
 	{
 		perror("zsh: parse error near '\\n'");
-		return (0);
+		exit(EXIT_FAILURE);
 	}
 	return (1);
 }

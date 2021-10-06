@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cmd.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 11:04:22 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 11:36:18 by abrun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	ft_cmd_1(int **fds, char **newargv)
@@ -26,7 +38,6 @@ void	ft_cmd_2(int **fds, char **newargv)
 	ft_close_fd(fds[1][0]);
 	ft_dup2(fds[0][0], STDIN_FILENO);
 	ft_dup2(fds[1][1], STDOUT_FILENO);
-	ft_dup2(fds[1][1], STDERR_FILENO);
 	ft_close_fd(fds[0][0]);
 	ft_close_fd(fds[1][1]);
 	if (execve(newargv[0], newargv, NULL) == -1)
@@ -49,8 +60,8 @@ int	get_outfd(char *file)
 		}
 		else
 		{
-			outfd = 0;
-			perror("zsh: permission denied: outfile");
+			outfd = -1;
+			perror("zsh: outfile");
 		}
 	}
 	else

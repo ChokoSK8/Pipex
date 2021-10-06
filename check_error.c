@@ -1,11 +1,15 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 11:03:36 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 11:14:57 by abrun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 int	check_error(char **av, int ac)
@@ -14,11 +18,6 @@ int	check_error(char **av, int ac)
 
 	if (ac < 5)
 		return (0);
-	if (access(av[1], R_OK))
-	{
-		perror("Le 2e argument n'est un fichier valide");
-		return (0);
-	}
 	n_cmd = get_n_cmd(av, ac);
 	if (n_cmd < 0)
 	{

@@ -1,6 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 11:06:30 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 11:07:16 by abrun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
+# include <stdlib.h>
 # include <stdio.h>
+# include <unistd.h>
 # include <sys/wait.h>
 # include <sys/types.h>
 # include <sys/stat.h>

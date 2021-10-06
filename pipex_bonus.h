@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/06 11:08:30 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/06 11:55:23 by abrun            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_BONUS_H
 # define PIPEX_BONUS_H
 # include <sys/wait.h>
+# include <errno.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
