@@ -6,13 +6,11 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 12:17:09 by abrun             #+#    #+#             */
-/*   Updated: 2021/01/12 17:05:02 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 15:33:12 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stdio.h>
 
 char	*ft_strdup(const char *s1, int len)
 {

@@ -6,18 +6,18 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:43:15 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 15:43:39 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 15:38:56 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	free_mati(int **mati)
+void	free_mati(int **mati, int m_len)
 {
 	int		n;
 
 	n = 0;
-	while (mati[n])
+	while (n < m_len)
 	{
 		free(mati[n]);
 		n++;

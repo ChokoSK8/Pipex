@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:22 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 14:56:55 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 15:07:36 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,6 @@ int	ft_write_in_file(int **fds, char **av, int ac)
 		return (0);
 	write(outfd, str_file, ft_strlen(str_file));
 	close(outfd);
+	free(str_file);
 	return (1);
 }

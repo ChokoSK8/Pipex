@@ -6,13 +6,13 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:03:53 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 18:30:29 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 16:42:15 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	**init_paths()
+char	**init_paths(void)
 {
 	char	**paths;
 	int		fd;

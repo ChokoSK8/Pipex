@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 17:22:50 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 18:29:42 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 13:33:00 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,32 @@ int	is_arg_of_cmd(char **paths, char *av, size_t av_len)
 		free(cmd);
 	}
 	return (1);
+}
+
+char	*assign_one_case(char **av, int *pt_av)
+{
+	char	*newargv;
+
+	newargv = malloc(sizeof(ft_strlen(av[*pt_av]) + 1));
+	if (!newargv)
+		return (0);
+	ft_strcpy(newargv, av[*pt_av]);
+	*pt_av += 1;
+	return (newargv);
+}
+
+char	**assign_last_case(char **newargv, int count, char *av, int pt_av)
+{
+	if (pt_av == 2 + count)
+	{
+		newargv[count] = malloc(ft_strlen(av) + 1);
+		if (!newargv[count])
+		{
+			free_matc(newargv);
+			return (0);
+		}
+		ft_strcpy(newargv[count++], av);
+	}
+	newargv[count] = 0;
+	return (newargv);
 }

@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 19:29:37 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 16:52:57 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include "Libft/libft.h"
-# define BUFFER_SIZE 10
+
+int		main_cmds(int **fds, char ***newargv);
 
 void	ft_dup2(int newfd, int oldfd);
 
@@ -31,6 +32,10 @@ void	ft_close_fd(int fd);
 int		**make_pipes(void);
 
 char	**assign_param(char **av, int n_av, int pt_av, char **paths);
+
+char	*assign_one_case(char **av, int *pt_av);
+
+char	**assign_last_case(char **newargv, int count, char *av, int pt_av);
 
 char	*assign_cmd(char *av, char **paths);
 
@@ -52,6 +57,8 @@ int		check_file(char **av, int ac);
 
 int		get_n_cmd(char **av, int ac, char **paths);
 
+char	*init_cmd(char *path, char *av);
+
 char	*get_str_file(int fd);
 
 int		get_outfd(char *file);
@@ -68,7 +75,7 @@ char	*get_new_buf(char *buf);
 
 int		checker_and_init(int fd, char **line, char *buf);
 
-char	**init_paths();
+char	**init_paths(void);
 
 char	**get_new_mat_path(char **new_mat, char **mat, char *line, int matlen);
 
@@ -81,4 +88,15 @@ char	*ft_add_one_path(char *line, int *count);
 char	**get_paths(char *line, int count);
 
 int		get_path_len(char *line, int count);
+
+char	*get_buf_2(int fd, int *ret, char *buf);
+
+int		init_fill_line(char *buf, char *line,
+			size_t *line_bis_len, size_t *buf_len);
+
+void	free_params(char ***newargv, char **paths, int **fds);
+
+char	*get_file_line(int fd);
+
+char	*get_line_step_1(char *buf, int fd, int *ret);
 #endif

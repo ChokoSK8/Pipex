@@ -8,7 +8,7 @@ ft_putstr_fd.c ft_strchr.c ft_strdup.c ft_strjoin.c \
 ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c \
 ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c \
 ft_toupper.c ft_strcat.c ft_strcpy.c free_mati.c free_3dim_matc.c \
-free_matc.c ft_matlen.c print_matc.c
+free_matc.c ft_matlen.c print_matc.c ft_strjoin_free.c
 
 OBJS	= $(SRCS:.c=.o)
 

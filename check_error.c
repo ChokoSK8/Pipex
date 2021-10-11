@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:36 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 18:28:24 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 16:41:16 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,36 @@ int	get_n_cmd(char **av, int ac, char **paths)
 	int		c_path;
 	char	*cmd;
 
-	count = 2;
+	count = 1;
 	n_cmd = 0;
-	while (count < ac - 1)
+	while (++count < ac - 1)
 	{
-		c_path = 0;
-		while (paths[c_path])
+		c_path = -1;
+		while (paths[++c_path])
 		{
-			cmd = malloc(ft_strlen(paths[c_path]) + ft_strlen(av[count]));
+			cmd = init_cmd(paths[c_path], av[count]);
 			if (!cmd)
 				return (0);
-			ft_strcpy(cmd, paths[c_path]);
-			ft_strcat(cmd, av[count]);
 			if (!access(cmd, X_OK))
 			{
-					n_cmd++;
-					break ;
+				free(cmd);
+				n_cmd++;
+				break ;
 			}
-			c_path++;
+			free(cmd);
 		}
-		count++;
 	}
-	free(cmd);
 	return (n_cmd);
+}
+
+char	*init_cmd(char *path, char *av)
+{
+	char	*cmd;
+
+	cmd = malloc(ft_strlen(path) + ft_strlen(av) + 1);
+	if (!cmd)
+		return (0);
+	ft_strcpy(cmd, path);
+	ft_strcat(cmd, av);
+	return (cmd);
 }

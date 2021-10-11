@@ -6,11 +6,12 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:43:44 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 15:44:05 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 19:50:14 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	free_matc(char **matc)
 {
@@ -19,8 +20,10 @@ void	free_matc(char **matc)
 	n = 0;
 	while (matc[n])
 	{
+		printf("n2: %d\n", n);
 		free(matc[n]);
 		n++;
 	}
+	printf("n2: %d\n", n);
 	free(matc);
 }

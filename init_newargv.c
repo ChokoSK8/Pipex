@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:35 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 18:46:35 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/11 19:02:43 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ char	***ft_init_newargvs(char **av, int ac, char **paths)
 	{
 		n_av = get_n_av(pt_av + 1, av, ac, paths);
 		if (n_av < 0)
-			return (0);
-		newargv[count] = malloc(sizeof(char *) * (n_av + 3));
-		if (!newargv[count])
 			return (0);
 		newargv[count] = assign_param(av, n_av, pt_av, paths);
 		if (!newargv[count])
@@ -54,29 +51,14 @@ int	get_n_av(int pt_av, char **av, int ac, char **paths)
 	while (loop && n_av + pt_av < ac - 1)
 	{
 		n_av++;
-		arg = is_arg_of_cmd(paths, av[pt_av + n_av], ft_strlen(av[pt_av + n_av]));
+		arg = is_arg_of_cmd(paths, av[pt_av + n_av],
+				ft_strlen(av[pt_av + n_av]));
 		if (arg < 0)
 			return (-1);
 		if (!arg)
 			loop = 0;
 	}
 	return (n_av);
-}
-
-char	*get_last_param(char **av, int pt_av)
-{
-	char	*param;
-
-	if (!av[pt_av])
-	{
-		param = malloc(ft_strlen(av[pt_av - 1]) + 1);
-		if (!param)
-			return (0);
-		ft_strcpy(param, av[pt_av - 1]);
-	}
-	else
-		return (0);
-	return (param);
 }
 
 char	*assign_cmd(char *av, char **paths)
@@ -95,7 +77,9 @@ char	*assign_cmd(char *av, char **paths)
 		if (!access(cmd, X_OK))
 			return (cmd);
 		n_path++;
+		free(cmd);
 	}
+	free(cmd);
 	return (0);
 }
 
@@ -108,26 +92,18 @@ char	**assign_param(char **av, int n_av, int pt_av, char **paths)
 	newargv = malloc(sizeof(char *) * (n_av + 3));
 	if (!newargv)
 		return (0);
-	newargv[count] = assign_cmd(av[pt_av], paths);
+	newargv[count] = assign_cmd(av[pt_av++], paths);
 	if (!newargv[count++])
 		return (0);
-	pt_av++;
 	while (n_av--)
 	{
-		newargv[count] = malloc(sizeof(ft_strlen(av[pt_av]) + 1));
-		if (!newargv[count])
+		newargv[count] = assign_one_case(av, &pt_av);
+		if (!newargv[count++])
+		{
+			free_matc(newargv);
 			return (0);
-		ft_strcpy(newargv[count], av[pt_av]);
-		count++;
-		pt_av++;
+		}
 	}
-	if (pt_av == 2 + count)
-	{
-		newargv[count] = malloc(ft_strlen(av[1]) + 1);
-		if (!newargv[count])
-			return (0);
-		ft_strcpy(newargv[count++], av[1]);
-	}
-	newargv[count] = 0;
+	newargv = assign_last_case(newargv, count, av[1], pt_av);
 	return (newargv);
 }
