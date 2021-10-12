@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:57 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 19:27:47 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/12 13:29:34 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_error(char **av, int ac, int len_av, char **paths)
 	}
 	if (n_cmd < 2)
 	{
-		perror("Il n'y a pas assez de commandes");
+		perror("Il n'y a pas exactement 2 commandes");
 		return (0);
 	}
 	return (1);

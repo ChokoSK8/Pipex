@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:53:15 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 19:55:51 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/12 13:14:06 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ char	**assign_last_case(char **newargv, int count, char *av, int pt_av)
 		}
 		ft_strcpy(newargv[count++], av);
 	}
-	printf("newargv[%d] : %s\n", count - 1, newargv[count - 1]);
-	printf("count : %d\n", count);
 	newargv[count] = 0;
 	return (newargv);
 }

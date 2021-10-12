@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:50 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 11:05:52 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/12 13:03:32 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,23 @@ char	*get_str_file(int fd)
 	char	*str_file;
 	int		ret;
 
-	str_file = malloc(1);
+	ret = read(fd, buf, 10);
+	if (ret < 0)
+		return (0);
+	buf[ret] = 0;
+	str_file = ft_strdup(buf, ft_strlen(buf));
 	if (!str_file)
 		return (0);
-	*str_file = 0;
-	ret = 1;
-	while (ret)
+	while (ret > 0)
 	{
 		ret = read(fd, buf, 10);
+		if (ret < 0)
+		{
+			free(str_file);
+			return (0);
+		}
 		buf[ret] = 0;
-		str_file = ft_strjoin(str_file, buf);
+		str_file = ft_strjoin_free(str_file, buf);
 		if (!str_file)
 			return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:44 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 19:49:11 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/12 13:20:41 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	***ft_init_newargvs_b(char **av, int ac, int n_cmd, char **paths)
 			return (0);
 		pt_av += n_av + 1;
 	}
-	printf("count : %d\n", count);
 	newargv[count] = 0;
 	return (newargv);
 }

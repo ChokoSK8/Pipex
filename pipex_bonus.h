@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:08:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 19:22:05 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/12 12:50:01 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,10 @@ char	**assign_last_case(char **newargv, int count, char *av, int pt_av);
 char	*assign_one_case(char **av, int *pt_av);
 
 int		is_arg_of_cmd(char **paths, char *av, size_t av_len);
+
+void	free_params(char ***newargv, char **paths, int **fds, char *heredoc);
+
+void	free_params_main(char **paths, int **fds);
+
+int		get_next_line(int fd, char **line);
 #endif

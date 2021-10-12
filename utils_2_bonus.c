@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_matc.c                                        :+:      :+:    :+:   */
+/*   utils_2_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/06 15:43:44 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 12:31:03 by abrun            ###   ########.fr       */
+/*   Created: 2021/10/12 12:20:46 by abrun             #+#    #+#             */
+/*   Updated: 2021/10/12 12:49:25 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "pipex_bonus.h"
 
-void	free_matc(char **matc)
+void	free_params(char ***newargv, char **paths,
+				int **fds, char *heredoc)
 {
-	int		n;
+	if (heredoc)
+		free(heredoc);
+	if (newargv)
+		free_3dim_matc(newargv);
+	if (paths)
+		free_matc(paths);
+	if (fds)
+		free_mati(fds, 2);
+}
 
-	n = 0;
-	while (matc[n])
-	{
-		free(matc[n]);
-		n++;
-	}
-	free(matc);
+void	free_params_main(char **paths, int **fds)
+{
+	if (paths)
+		free_matc(paths);
+	if (fds)
+		free_mati(fds, 2);
 }

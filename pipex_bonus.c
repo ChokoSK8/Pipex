@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:03 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 19:30:07 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/12 13:05:19 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av)
 	fds = make_pipes(n_cmd);
 	if (!make_cmds(fds, n_cmd, av, ac, paths))
 		return (0);
-	free(fds);
+	free_params_main(paths, fds);
 	return (1);
 }
 
@@ -43,18 +43,24 @@ int	main_2(int ac, char **av, char **paths)
 	char	***newargv;
 
 	if (!check_error(av, ac, 5, paths))
+	{
+		free_matc(paths);
 		return (0);
+	}
 	heredoc = get_heredoc(av);
-	if (!heredoc)
-		return (0);
 	newargv = init_nw_2(av, ac, paths);
 	fds = make_pipes(2);
-	if (!put_in_file(heredoc))
+	if (!heredoc || !newargv || !fds)
+	{
+		free_params(newargv, paths, fds, heredoc);
 		return (0);
-	if (!fds)
+	}
+	if (!put_in_file(heredoc) || !make_heredoc_cmd(fds, newargv, av, ac))
+	{
+		free_params(newargv, paths, fds, heredoc);
 		return (0);
-	if (!make_heredoc_cmd(fds, newargv, av, ac))
-		return (0);
+	}
 	unlink("file_tmp");
+	free_params(newargv, paths, fds, heredoc);
 	return (1);
 }
