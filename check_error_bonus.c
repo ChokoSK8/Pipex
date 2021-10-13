@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:57 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 13:29:34 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 11:44:00 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,23 @@ int	check_error(char **av, int ac, int len_av, char **paths)
 	errno = EIO;
 	if (ac < len_av)
 	{
+		free_matc(paths);
 		perror("zsh: parse error near '\\n'");
 		exit(EXIT_FAILURE);
 	}
 	n_cmd = get_n_cmd(av, ac, len_av - 2, paths);
 	if (n_cmd < 0)
 	{
+		free_matc(paths);
 		perror("zsh: parse error near '\\n'");
 		exit(EXIT_FAILURE);
 	}
 	if (n_cmd < 2)
 	{
-		perror("Il n'y a pas exactement 2 commandes");
-		return (0);
+		errno = EINTR;
+		free_matc(paths);
+		perror("Il n'y a pas assez de commandes");
+		exit(EXIT_FAILURE);
 	}
 	return (1);
 }
@@ -43,8 +47,8 @@ int	get_n_cmd(char **av, int ac, int from, char **paths)
 	char	*cmd;
 	int		c_path;
 
-	count = from - 1;
-	n_cmd = 0;
+	count = from;
+	n_cmd = 1;
 	while (++count < ac - 1)
 	{
 		c_path = -1;

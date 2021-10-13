@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:44 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 13:20:41 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 15:10:19 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	***ft_init_newargvs_b(char **av, int ac, int n_cmd, char **paths)
 	int		count;
 	int		pt_av;
 
-	newargv = malloc(sizeof(char **) * n_cmd);
+	newargv = malloc(sizeof(char **) * (n_cmd + 1));
 	if (!newargv)
 		return (0);
 	count = -1;
@@ -28,8 +28,11 @@ char	***ft_init_newargvs_b(char **av, int ac, int n_cmd, char **paths)
 	{
 		n_av = get_n_av(pt_av + 1, av, ac, paths);
 		newargv[count] = assign_param(av, n_av, pt_av, paths);
-		if (!newargv[count])
+		if (n_av < 0 || !newargv[count])
+		{
+			free_3dim_matc(newargv);
 			return (0);
+		}
 		pt_av += n_av + 1;
 	}
 	newargv[count] = 0;
@@ -62,13 +65,14 @@ char	**assign_param(char **av, int n_av, int pt_av, char **paths)
 	int		count;
 	char	**newargv;
 
+	if (n_av < 0)
+		return (0);
 	count = 0;
 	newargv = malloc(sizeof(char *) * (n_av + 3));
 	if (!newargv)
 		return (0);
 	newargv[count] = assign_cmd(av[pt_av++], paths);
-	if (!newargv[count++])
-		return (0);
+	count++;
 	while (n_av--)
 	{
 		newargv[count] = assign_one_case(av, &pt_av);

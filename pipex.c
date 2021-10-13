@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:10 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 16:38:58 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 16:07:42 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int	main(int ac, char **av)
 	paths = init_paths();
 	if (!paths)
 		return (0);
-	newargv = ft_init_newargvs(av, ac, paths);
-	fds = make_pipes();
-	if (!check_error(av, ac, paths) || !newargv || !fds)
+	if (!check_error(av, ac, paths))
 	{
-		free_params(newargv, paths, fds);
+		free_matc(paths);
 		return (0);
 	}
-	if (!main_cmds(fds, newargv))
+	newargv = ft_init_newargvs(av, ac, paths);
+	fds = make_pipes();
+	if (!newargv || !fds || !main_cmds(fds, newargv))
 	{
 		free_params(newargv, paths, fds);
 		return (0);

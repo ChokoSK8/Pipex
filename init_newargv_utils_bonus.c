@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:53:15 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 13:14:06 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 11:50:54 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	*assign_cmd(char *av, char **paths)
 		n_path++;
 		free(cmd);
 	}
-	free(cmd);
-	return (0);
+	cmd = malloc(ft_strlen(av) + 1);
+	ft_strcpy(cmd, av);
+	return (cmd);
 }

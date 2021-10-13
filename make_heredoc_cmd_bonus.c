@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:27 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/06 11:05:29 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 15:54:15 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ int	make_heredoc_cmd(int **fds, char ***newargv, char **av, int ac)
 
 void	ft_write_in_file_2(int **fds, char **av, int ac, int n_newargv)
 {
-	char	buf[100];
-	int		ret;
 	int		outfd;
-	char	c;
+	char	*str_file;
 
 	ft_close_all_execpt(fds, n_newargv);
-	ret = read(fds[n_newargv][0], buf, 100);
+	str_file = get_str_file(fds[n_newargv][0]);
 	ft_close_fd(fds[n_newargv][0]);
-	buf[ret] = 0;
-	outfd = open(av[ac - 1], O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+	if (!str_file)
+		return ;
+	outfd = get_outfd(av[ac - 1], 2);
 	if (outfd < 0)
-		exit(EXIT_FAILURE);
-	ret = 1;
-	while (ret)
-		ret = read(outfd, &c, 1);
-	write(outfd, buf, ft_strlen(buf));
+	{
+		free(str_file);
+		return ;
+	}
+	write(outfd, str_file, ft_strlen(str_file));
+	free(str_file);
 	close(outfd);
 }

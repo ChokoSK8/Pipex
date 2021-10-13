@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:35 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 19:02:43 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 14:47:13 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,15 @@ char	***ft_init_newargvs(char **av, int ac, char **paths)
 	while (++count < 2)
 	{
 		n_av = get_n_av(pt_av + 1, av, ac, paths);
-		if (n_av < 0)
-			return (0);
 		newargv[count] = assign_param(av, n_av, pt_av, paths);
-		if (!newargv[count])
+		if (n_av < 0 || !newargv[count])
+		{
+			free_3dim_matc(newargv);
 			return (0);
-		if (pt_av == 2)
-			pt_av++;
-		pt_av += n_av;
+		}
+		pt_av += n_av + 1;
 	}
-	newargv[2] = 0;
+	newargv[count] = 0;
 	return (newargv);
 }
 

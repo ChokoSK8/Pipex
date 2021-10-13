@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:50 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 13:03:32 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 13:09:39 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*get_heredoc(char **av)
 		ret = read(STDOUT_FILENO, buf, 100);
 		buf[ret] = 0;
 		if (strncmp(buf, av[2], strlen(av[2])))
-			heredoc = ft_strjoin(heredoc, buf);
+			heredoc = ft_strjoin_free(heredoc, buf);
 		else
 			ret = 0;
 	}

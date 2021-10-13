@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:17 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 13:08:52 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 15:39:19 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,43 @@ int	loop_cmd(int n_cmd, int n_newargv, char ***newargv, int **fds)
 	return (n_newargv);
 }
 
-int	make_cmds(int **fds, int n_cmd, char **av, int ac, char **paths)
+int	make_cmds(int n_cmd, char **av, int ac, char **paths)
 {
-	int		child_pid;
+	pid_t	child_pid;
 	int		n_newargv;
 	char	***newargv;
+	int		**fds;
 
+	fds = make_pipes(n_cmd);
 	newargv = ft_init_newargvs_b(av, ac, n_cmd, paths);
-	if (!newargv)
-		return (0);
 	child_pid = fork();
-	if (child_pid == -1)
+	if (!newargv || !fds || child_pid == -1)
 	{
-		free_3dim_matc(newargv);
+		free_makecmds(newargv, fds, n_cmd);
 		return (0);
 	}
 	if (child_pid == 0)
 		ft_cmd_1(fds, newargv[0], 0);
-	n_newargv = 1;
-	n_newargv = loop_cmd(n_cmd, n_newargv, newargv, fds);
-	child_pid = fork();
+	n_newargv = loop_cmd(n_cmd, 1, newargv, fds);
+	child_pid = get_child_pid(newargv, fds, n_cmd);
 	if (child_pid == -1)
-	{
-		free_3dim_matc(newargv);
 		return (0);
-	}
 	if (child_pid == 0)
 		ft_cmd_2(fds, newargv[n_newargv], n_newargv);
 	ft_write_in_file(fds, av, ac, n_newargv);
-	free_3dim_matc(newargv);
+	free_makecmds(newargv, fds, n_cmd);
 	return (1);
 }
+
+pid_t	get_child_pid(char ***newargv, int **fds, int n_cmd)
+{
+	pid_t	child_pid;
+
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		free_makecmds(newargv, fds, n_cmd);
+		return (-1);
+	}
+	return (child_pid);
+}	

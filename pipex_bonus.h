@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:08:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/12 12:50:01 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/13 15:36:28 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_cmd_n(int **fds, char **newargv, int n_newargv);
 
 int		loop_cmd(int n_cmd, int n_newargv, char ***newargv, int **fds);
 
-int		make_cmds(int **fds, int n_cmd, char **av, int ac, char **paths);
+int		make_cmds(int n_cmd, char **av, int ac, char **paths);
 
 int		main_2(int ac, char **av, char **paths);
 
@@ -82,7 +82,7 @@ int		main_2(int ac, char **av, char **paths);
 
 char	*get_str_file(int fd);
 
-int		get_outfd(char *file);
+int		get_outfd(char *file, int config);
 
 char	**init_paths(void);
 
@@ -92,13 +92,15 @@ char	*assign_cmd(char *av, char **paths);
 
 char	**assign_last_case(char **newargv, int count, char *av, int pt_av);
 
+char	**assign_last_case_2(char **newargv, int count, int pt_av);
+
 char	*assign_one_case(char **av, int *pt_av);
 
 int		is_arg_of_cmd(char **paths, char *av, size_t av_len);
 
-void	free_params(char ***newargv, char **paths, int **fds, char *heredoc);
+void	free_params(char ***newargv, char **paths, char *heredoc);
 
-void	free_params_main(char **paths, int **fds);
+void	free_makecmds(char ***newargv, int **fds, int n_cmd);
 
-int		get_next_line(int fd, char **line);
+pid_t	get_child_pid(char ***newargv, int **fds, int n_cmd);
 #endif
