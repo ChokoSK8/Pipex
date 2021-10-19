@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:08:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 15:36:28 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 13:35:37 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ char	*get_last_param(char **av, int pt_av);
 
 int		get_n_av(int pt_av, char **av, int ac, char **paths);
 
-char	***ft_init_newargvs_b(char **av, int ac, int n_cmd, char **paths);
+char	***ft_init_newargvs_b(char **av, char **paths, int n_cmd);
+
+char	***init_newargvs_2(char **av, char **paths);
 
 int		ft_write_in_file(int **fds, char **av, int ac, int n_newargv);
 
 void	ft_cmd_1(int **fds, char **newargv, int n_newargv);
 
 void	ft_cmd_2(int **fds, char **newargv, int n_newargv);
-
-int		check_error(char **av, int ac, int len_av, char **paths);
 
 int		check_file(char **av, int ac);
 
@@ -69,8 +69,6 @@ int		main_2(int ac, char **av, char **paths);
 char	*get_heredoc(char **av);
 
 char	**assign_param_2(char **av, int n_av, int pt_av, char **paths);
-
-char	***init_nw_2(char **av, int ac, char **paths);
 
 int		put_in_file(char *heredoc);
 
@@ -103,4 +101,24 @@ void	free_params(char ***newargv, char **paths, char *heredoc);
 void	free_makecmds(char ***newargv, int **fds, int n_cmd);
 
 pid_t	get_child_pid(char ***newargv, int **fds, int n_cmd);
+
+int		get_n_cases(char *av, char c, int count);
+
+int		get_next_c(char *av, int c);
+
+char	*assign_next(char *av, int c);
+
+char	**assign_last(char **newargv, char *av, int count, int n);
+
+char	*split_cmd(char *av);
+
+char	**get_one_newargv(char **av, int count, char **paths);
+
+char	**get_one_newargv_2(char **av, int count, char **paths);
+
+char	**assign_last_2(char **newargv, int count, int n);
+
+char	*get_str_file(int fd);
+
+void	free_params_nhf(char ***newargv, char * heredoc, int **fds, int n_cmd);
 #endif

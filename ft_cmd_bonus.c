@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:28 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 14:45:08 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 13:02:45 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	get_outfd(char *file, int config)
 	else if (config == 1)
 		outfd = open(file, O_CREAT | O_RDWR | O_TRUNC,
 				S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
-	else if (config == 2)
+	else 
 		outfd = open(file, O_CREAT | O_RDWR,
 				S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
 	return (outfd);

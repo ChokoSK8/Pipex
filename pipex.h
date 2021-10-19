@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 16:52:57 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 12:30:24 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_last_param(char **av, int pt_av);
 
 int		get_n_av(int pt_av, char **av, int ac, char **paths);
 
-char	***ft_init_newargvs(char **av, int ac, char **paths);
+char	***ft_init_newargvs(char **av, char **paths);
 
 int		ft_write_in_file(int **fds, char **av, int ac);
 
@@ -99,4 +99,16 @@ void	free_params(char ***newargv, char **paths, int **fds);
 char	*get_file_line(int fd);
 
 char	*get_line_step_1(char *buf, int fd, int *ret);
+
+int		get_n_cases(char *av, char c, int count);
+
+int		get_next_c(char *av, int c);
+
+char	*assign_next(char *av, int c);
+
+char	**assign_last(char **newargv, char *av, int count, int n);
+
+char	*split_cmd(char *av);
+
+char	**get_one_newargv(char **av, int count, char **paths);
 #endif

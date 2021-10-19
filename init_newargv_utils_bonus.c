@@ -6,83 +6,101 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 18:53:15 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 11:50:54 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 13:00:20 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-int	is_arg_of_cmd(char **paths, char *av, size_t av_len)
+int	get_n_cases(char *str, char c, int count)
 {
-	int		n_path;
-	char	*cmd;
+	int	n;
 
-	n_path = 0;
-	while (paths[n_path])
+	n = 0;
+	while (*str && *str == c)
+		str++;
+	while (*str)
 	{
-		cmd = malloc(ft_strlen(paths[n_path]) + av_len + 1);
-		if (!cmd)
-			return (-1);
-		ft_strcpy(cmd, paths[n_path]);
-		ft_strcat(cmd, av);
-		if (!access(cmd, X_OK))
-		{
-			free(cmd);
-			return (0);
-		}
-		n_path++;
-		free(cmd);
+		n++;
+		while (*str && *str != c)
+			str++;
+		while (*str && *str == c)
+			str++;
 	}
-	return (1);
+	if (!count)
+		n++;
+	return (n);
 }
 
-char	*assign_one_case(char **av, int *pt_av)
+char	*split_cmd(char *av)
 {
-	char	*newargv;
+	char	*split;
+	int		len;
+	int		c;
 
-	newargv = malloc(sizeof(ft_strlen(av[*pt_av]) + 1));
-	if (!newargv)
-		return (0);
-	ft_strcpy(newargv, av[*pt_av]);
-	*pt_av += 1;
-	return (newargv);
-}
-
-char	**assign_last_case(char **newargv, int count, char *av, int pt_av)
-{
-	if (pt_av == 2 + count)
+	len = 0;
+	c = 0;
+	while (av[c] && av[c] == 32)
+		c++;
+	while (av[c + len] && av[c + len] != 32)
+		len++;
+	split = malloc(len + 1);
+	len = 0;
+	while (av[c + len] && av[c + len] != 32)
 	{
-		newargv[count] = malloc(ft_strlen(av) + 1);
-		if (!newargv[count])
+		split[len] = av[c + len];
+		len++;
+	}
+	split[len] = 0;
+	return (split);
+}
+
+int	get_next_c(char *av, int c)
+{
+	while (av[c] && av[c] == 32)
+		c++;
+	while (av[c] && av[c] != 32)
+		c++;
+	while (av[c] && av[c] == 32)
+		c++;
+	return (c);
+}
+
+char	*assign_next(char *av, int c)
+{
+	int		len;
+	char	*split;
+	int		count;
+
+	len = 0;
+	while (av[c + len] && av[c + len] != 32)
+		len++;
+	split = malloc(len + 1);
+	if (!split)
+		return (0);
+	count = 0;
+	while (av[c + count] && av[c + count] != 32)
+	{
+		split[count] = av[c + count];
+		count++;
+	}
+	split[count] = 0;
+	return (split);
+}
+
+char	**assign_last(char **newargv, char *av, int count, int n)
+{
+	if (!count)
+	{
+		newargv[n] = malloc(ft_strlen(av) + 1);
+		if (!newargv[n])
 		{
 			free_matc(newargv);
 			return (0);
 		}
-		ft_strcpy(newargv[count++], av);
+		ft_strcpy(newargv[n], av);
+		n++;
 	}
-	newargv[count] = 0;
+	newargv[n] = 0;
 	return (newargv);
-}
-
-char	*assign_cmd(char *av, char **paths)
-{
-	char	*cmd;
-	int		n_path;
-	size_t	av_len;
-
-	n_path = 0;
-	av_len = ft_strlen(av);
-	while (paths[n_path])
-	{
-		cmd = malloc(ft_strlen(paths[n_path]) + av_len + 1);
-		ft_strcpy(cmd, paths[n_path]);
-		ft_strcat(cmd, av);
-		if (!access(cmd, X_OK))
-			return (cmd);
-		n_path++;
-		free(cmd);
-	}
-	cmd = malloc(ft_strlen(av) + 1);
-	ft_strcpy(cmd, av);
-	return (cmd);
 }

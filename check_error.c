@@ -6,32 +6,11 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:36 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 16:41:16 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 11:10:31 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int	check_error(char **av, int ac, char **paths)
-{
-	int	n_cmd;
-
-	errno = EIO;
-	if (ac < 5)
-		return (0);
-	n_cmd = get_n_cmd(av, ac, paths);
-	if (n_cmd < 0)
-	{
-		perror("zsh: parse error near '\\n'");
-		return (0);
-	}
-	if (n_cmd != 2)
-	{
-		perror("Il n'y a pas exactement 2 commandes");
-		return (0);
-	}
-	return (1);
-}
 
 int	get_n_cmd(char **av, int ac, char **paths)
 {

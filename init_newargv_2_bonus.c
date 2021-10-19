@@ -6,77 +6,76 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:51 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 15:06:04 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 13:26:47 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
 
-char	***init_nw_2(char **av, int ac, char **paths)
+char	***init_newargvs_2(char **av, char **paths)
 {
 	char	***newargv;
 	int		count;
-	int		n_av;
-	int		pt_av;
 
 	newargv = malloc(sizeof(char **) * 3);
 	if (!newargv)
 		return (0);
 	count = -1;
-	pt_av = 3;
 	while (++count < 2)
 	{
-		n_av = get_n_av(pt_av + 1, av, ac, paths);
-		newargv[count] = assign_param_2(av, n_av, pt_av, paths);
-		if (n_av < 0 || newargv[count])
+		newargv[count] = get_one_newargv_2(av, count, paths);
+		print_matc(newargv[count]);
+		if (!newargv[count])
 		{
 			free_3dim_matc(newargv);
 			return (0);
 		}
-		pt_av += n_av + 1;
 	}
 	newargv[count] = 0;
 	return (newargv);
 }
 
-char	**assign_param_2(char **av, int n_av, int pt_av, char **paths)
+char	**get_one_newargv_2(char **av, int count, char **paths)
 {
-	int		count;
+	int		n_cases;
 	char	**newargv;
+	int		n;
+	int		c;
 
-	count = 0;
-	if (n_av < 0)
-		return (0);
-	newargv = malloc(sizeof(char *) * (n_av + 3));
+	n_cases = get_n_cases(av[count + 3], 32, count);
+	newargv = malloc(sizeof(char *) * (n_cases + 1));
 	if (!newargv)
 		return (0);
-	newargv[count] = assign_cmd(av[pt_av++], paths);
-	count++;
-	while (n_av--)
+	n = 0;
+	newargv[n++] = assign_cmd(av[count + 3], paths);
+	c = 0;
+	c = get_next_c(av[count + 3], c);
+	while (av[count + 3][c])
 	{
-		newargv[count] = assign_one_case(av, &pt_av);
-		if (!newargv[count++])
+		newargv[n] = assign_next(av[count + 3], c);
+		if (!newargv[n++])
 		{
 			free_matc(newargv);
 			return (0);
 		}
+		c = get_next_c(av[count + 3], c);
 	}
-	newargv = assign_last_case_2(newargv, count, pt_av);
+	newargv = assign_last_2(newargv, count, n);
 	return (newargv);
 }
 
-char	**assign_last_case_2(char **newargv, int count, int pt_av)
+char	**assign_last_2(char **newargv, int count, int n)
 {
-	if (pt_av == 3 + count)
+	if (!count)
 	{
-		newargv[count] = malloc(ft_strlen("file_tmp") + 1);
-		if (!newargv[count])
+		newargv[n] = malloc(ft_strlen("file_tmp") + 1);
+		if (!newargv[n])
 		{
 			free_matc(newargv);
 			return (0);
 		}
-		ft_strcpy(newargv[count++], "file_tmp");
+		ft_strcpy(newargv[n++], "file_tmp");
 	}
-	newargv[count] = 0;
+	newargv[n] = 0;
 	return (newargv);
 }

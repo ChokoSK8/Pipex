@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:17 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 15:39:19 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 13:03:23 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	make_cmds(int n_cmd, char **av, int ac, char **paths)
 	int		**fds;
 
 	fds = make_pipes(n_cmd);
-	newargv = ft_init_newargvs_b(av, ac, n_cmd, paths);
+	newargv = ft_init_newargvs_b(av, paths, n_cmd);
 	child_pid = fork();
 	if (!newargv || !fds || child_pid == -1)
 	{

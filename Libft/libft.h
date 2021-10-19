@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 15:18:03 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 15:39:11 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 11:00:20 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,6 @@ void				print_matc(char **mat);
 void				free_3dim_matc(char ***matc);
 
 char				*ft_strjoin_free(char *s1, const char *s2);
+
+char				**ft_split(char *str, char c);
 #endif

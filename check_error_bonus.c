@@ -6,68 +6,11 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:03:57 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 11:44:00 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 12:53:08 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex_bonus.h"
-
-int	check_error(char **av, int ac, int len_av, char **paths)
-{
-	int	n_cmd;
-
-	errno = EIO;
-	if (ac < len_av)
-	{
-		free_matc(paths);
-		perror("zsh: parse error near '\\n'");
-		exit(EXIT_FAILURE);
-	}
-	n_cmd = get_n_cmd(av, ac, len_av - 2, paths);
-	if (n_cmd < 0)
-	{
-		free_matc(paths);
-		perror("zsh: parse error near '\\n'");
-		exit(EXIT_FAILURE);
-	}
-	if (n_cmd < 2)
-	{
-		errno = EINTR;
-		free_matc(paths);
-		perror("Il n'y a pas assez de commandes");
-		exit(EXIT_FAILURE);
-	}
-	return (1);
-}
-
-int	get_n_cmd(char **av, int ac, int from, char **paths)
-{
-	int		count;
-	int		n_cmd;
-	char	*cmd;
-	int		c_path;
-
-	count = from;
-	n_cmd = 1;
-	while (++count < ac - 1)
-	{
-		c_path = -1;
-		while (paths[++c_path])
-		{
-			cmd = init_cmd(paths[c_path], av[count]);
-			if (!cmd)
-				return (0);
-			if (!access(cmd, X_OK))
-			{
-				free(cmd);
-				n_cmd++;
-				break ;
-			}
-			free(cmd);
-		}
-	}
-	return (n_cmd);
-}
 
 char	*init_cmd(char *path, char *av)
 {

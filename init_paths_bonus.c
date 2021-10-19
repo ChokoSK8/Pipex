@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_paths_linux.c                                 :+:      :+:    :+:   */
+/*   init_paths_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 15:03:53 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 16:48:18 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/19 13:22:42 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	**init_paths(void)
 	char	*line;
 	int		count;
 
-	fd = open("/etc/environment", O_RDONLY);
+//	fd = open("/etc/environment", O_RDONLY);
+	fd = open("paths.txt", O_RDONLY);
 	if (fd < 0)
 		return (0);
 	line = get_file_line(fd);
