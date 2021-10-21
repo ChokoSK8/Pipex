@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:28 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/21 12:35:03 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 14:18:00 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_cmd_1(int **fds, char **newargv, int n_newargv, char *infile)
 	{
 		ft_dup2(infd, STDIN_FILENO);
 		ft_close_fd(infd);
-		unlink(infile);
 	}
 	else
 	{

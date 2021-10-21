@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:50 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/15 03:30:11 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 14:31:23 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	*get_heredoc(char **av)
 		else
 			ret = 0;
 	}
+	read(STDOUT_FILENO, buf, 1);
 	free(buf);
 	return (heredoc);
 }

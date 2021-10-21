@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:03 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/21 12:34:53 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 14:30:04 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main_2(int ac, char **av, char **paths)
 	int		ret;
 
 	ret = 1;
-	if (ac < 6)
+	if (ac != 6)
 		return (0);
 	heredoc = get_heredoc(av);
 	newargv = init_newargvs_2(av, paths);
