@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:17 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 13:03:23 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:19:39 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	make_cmds(int n_cmd, char **av, int ac, char **paths)
 		return (0);
 	}
 	if (child_pid == 0)
-		ft_cmd_1(fds, newargv[0], 0);
+		ft_cmd_1(fds, newargv[0], 0, av[1]);
 	n_newargv = loop_cmd(n_cmd, 1, newargv, fds);
 	child_pid = get_child_pid(newargv, fds, n_cmd);
 	if (child_pid == -1)

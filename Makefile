@@ -1,8 +1,8 @@
 NAME	= pipex
 
-SRCS	= check_error.c init_newargv.c init_newargv_utils.c utils.c pipex.c ft_close.c ft_cmd.c init_paths.c init_paths_utils.c
+SRCS	= check_error.c init_newargv.c init_newargv_utils.c utils.c pipex.c ft_close.c ft_cmd.c init_paths.c init_paths_utils.c ft_put_error.c
 
-SRCS_B	= check_error_bonus.c init_newargv_bonus.c init_newargv_utils_bonus.c init_newargv_2_bonus.c pipex_bonus.c ft_close_bonus.c ft_cmd_bonus.c make_cmd_bonus.c make_heredoc_cmd_bonus.c utils_bonus.c utils_2_bonus.c init_paths_bonus.c init_paths_utils_bonus.c
+SRCS_B	= check_error_bonus.c init_newargv_bonus.c init_newargv_utils_bonus.c init_newargv_2_bonus.c pipex_bonus.c ft_close_bonus.c ft_cmd_bonus.c make_cmd_bonus.c make_heredoc_cmd_bonus.c utils_bonus.c utils_2_bonus.c init_paths_bonus.c init_paths_utils_bonus.c ft_put_error_bonus.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -16,7 +16,7 @@ FLAGS	= -Wall -Werror -Wextra
 all:	$(NAME)
 
 bonus:		lib $(OBJS_B)
-		gcc $(FLAGS) $(OBJS_B) -o $(NAME) Libft/libft.a
+		gcc $(FLAGS) $(OBJS_B) -o $(NAME) Libft/libft.a -no-pie
 
 RM		= rm -rf
 
@@ -26,7 +26,7 @@ lib:
 	make -C Libft
 
 $(NAME):	lib $(OBJS)
-		gcc $(FLAGS) $(OBJS) -fPIE -o $(NAME) Libft/libft.a
+		gcc $(FLAGS) $(OBJS) -o $(NAME) Libft/libft.a
 
 clean:
 		$(RM) *.o

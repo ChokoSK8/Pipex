@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:05:27 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/13 15:54:15 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:23:50 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	make_heredoc_cmd(int **fds, char ***newargv, char **av, int ac)
 	if (child_pid == -1)
 		return (0);
 	if (child_pid == 0)
-		ft_cmd_1(fds, newargv[0], 0);
+		ft_cmd_1(fds, newargv[0], 0, "file_tmp");
 	child_pid = fork();
 	if (child_pid == -1)
 		return (0);

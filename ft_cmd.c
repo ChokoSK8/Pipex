@@ -6,27 +6,35 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:22 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/11 15:07:36 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:18:10 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_cmd_1(int **fds, char **newargv)
+void	ft_cmd_1(int **fds, char **newargv, char *infile)
 {
+	int	infd;
+
+	infd = open(infile, O_RDONLY);
+	if (infd > 0)
+	{
+		ft_dup2(infd, STDIN_FILENO);
+		ft_close_fd(infd);
+	}
+	else
+	{
+		ft_put_error(infile);
+		exit(EXIT_FAILURE);
+	}
 	ft_close_fd(fds[0][0]);
 	ft_close_fd(fds[1][0]);
 	ft_close_fd(fds[1][1]);
 	ft_dup2(fds[0][1], STDOUT_FILENO);
 	ft_close_fd(fds[0][1]);
-	if (access(newargv[0], X_OK))
-	{
-		perror("zsh: command not found");
-		exit(EXIT_FAILURE);
-	}
 	if (execve(newargv[0], newargv, NULL) == -1)
 	{
-		perror("La fonction execve 1 a echoue");
+		perror("zsh: command not found");
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_FAILURE);
@@ -61,7 +69,7 @@ int	get_outfd(char *file)
 		else
 		{
 			outfd = -1;
-			perror("zsh: outfile");
+			ft_put_error(file);
 		}
 	}
 	else

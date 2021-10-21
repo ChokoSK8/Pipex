@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:35 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 12:46:15 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 11:48:00 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	**get_one_newargv(char **av, int count, char **paths)
 		}
 		c = get_next_c(av[count + 2], c);
 	}
-	newargv = assign_last(newargv, av[1], count, n); 
+	newargv[n] = 0;
 	return (newargv);
 }
 

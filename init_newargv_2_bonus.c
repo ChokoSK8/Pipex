@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:51 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 13:26:47 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:26:11 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ char	***init_newargvs_2(char **av, char **paths)
 	while (++count < 2)
 	{
 		newargv[count] = get_one_newargv_2(av, count, paths);
-		print_matc(newargv[count]);
 		if (!newargv[count])
 		{
 			free_3dim_matc(newargv);
@@ -60,7 +59,7 @@ char	**get_one_newargv_2(char **av, int count, char **paths)
 		}
 		c = get_next_c(av[count + 3], c);
 	}
-	newargv = assign_last_2(newargv, count, n);
+	newargv[n] = 0;
 	return (newargv);
 }
 

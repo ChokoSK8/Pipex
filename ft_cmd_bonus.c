@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:28 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 13:02:45 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:35:03 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,22 @@ void	ft_cmd_n(int **fds, char **newargv, int n_newargv)
 	exit(EXIT_FAILURE);
 }
 
-void	ft_cmd_1(int **fds, char **newargv, int n_newargv)
+void	ft_cmd_1(int **fds, char **newargv, int n_newargv, char *infile)
 {
+	int	infd;
+
+	infd = open(infile, O_RDONLY);
+	if (infd > 0)
+	{
+		ft_dup2(infd, STDIN_FILENO);
+		ft_close_fd(infd);
+		unlink(infile);
+	}
+	else
+	{
+		ft_put_error(infile);
+		exit(EXIT_FAILURE);
+	}
 	ft_close_fds(fds, n_newargv);
 	ft_dup2(fds[n_newargv][1], STDOUT_FILENO);
 	ft_close_fd(fds[n_newargv][1]);
@@ -64,7 +78,7 @@ int	get_outfd(char *file, int config)
 		if (!access(file, W_OK) && config == 1)
 			outfd = open(file, O_TRUNC | O_WRONLY);
 		else if (!access(file, W_OK) && config == 2)
-			outfd = open(file, O_WRONLY);
+			outfd = open(file, O_APPEND | O_WRONLY);
 		else
 		{
 			outfd = -1;
@@ -74,7 +88,7 @@ int	get_outfd(char *file, int config)
 	else if (config == 1)
 		outfd = open(file, O_CREAT | O_RDWR | O_TRUNC,
 				S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
-	else 
+	else
 		outfd = open(file, O_CREAT | O_RDWR,
 				S_IRUSR | S_IRGRP | S_IWUSR | S_IROTH);
 	return (outfd);

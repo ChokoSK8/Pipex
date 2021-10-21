@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:06:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 12:30:24 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:06:43 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdarg.h>
 # include "Libft/libft.h"
 
-int		main_cmds(int **fds, char ***newargv);
+int		main_cmds(int **fds, char ***newargv, char *infile);
 
 void	ft_dup2(int newfd, int oldfd);
 
@@ -47,7 +47,7 @@ char	***ft_init_newargvs(char **av, char **paths);
 
 int		ft_write_in_file(int **fds, char **av, int ac);
 
-void	ft_cmd_1(int **fds, char **newargv);
+void	ft_cmd_1(int **fds, char **newargv, char *infile);
 
 void	ft_cmd_2(int **fds, char **newargv);
 
@@ -111,4 +111,6 @@ char	**assign_last(char **newargv, char *av, int count, int n);
 char	*split_cmd(char *av);
 
 char	**get_one_newargv(char **av, int count, char **paths);
+
+void	ft_put_error(char *s);
 #endif

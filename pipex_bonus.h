@@ -6,7 +6,7 @@
 /*   By: abrun <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:08:30 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 13:35:37 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:23:08 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	***init_newargvs_2(char **av, char **paths);
 
 int		ft_write_in_file(int **fds, char **av, int ac, int n_newargv);
 
-void	ft_cmd_1(int **fds, char **newargv, int n_newargv);
+void	ft_cmd_1(int **fds, char **newargv, int n_newargv, char *infile);
 
 void	ft_cmd_2(int **fds, char **newargv, int n_newargv);
 
@@ -120,5 +120,7 @@ char	**assign_last_2(char **newargv, int count, int n);
 
 char	*get_str_file(int fd);
 
-void	free_params_nhf(char ***newargv, char * heredoc, int **fds, int n_cmd);
+void	free_params_nhf(char ***newargv, char *heredoc, int **fds, int n_cmd);
+
+void	ft_put_error(char *s);
 #endif

@@ -6,7 +6,7 @@
 /*   By: abrun <abrun@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 11:04:44 by abrun             #+#    #+#             */
-/*   Updated: 2021/10/19 13:23:36 by abrun            ###   ########.fr       */
+/*   Updated: 2021/10/21 12:25:42 by abrun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ char	***ft_init_newargvs_b(char **av, char **paths, int n_cmd)
 	char	***newargv;
 	int		count;
 
-	newargv = malloc(sizeof(char **) * 3);
+	newargv = malloc(sizeof(char **) * (n_cmd + 1));
 	if (!newargv)
 		return (0);
 	count = -1;
 	while (++count < n_cmd)
 	{
 		newargv[count] = get_one_newargv(av, count, paths);
-		print_matc(newargv[count]);
 		if (!newargv[count])
 		{
 			free_3dim_matc(newargv);
@@ -60,7 +59,7 @@ char	**get_one_newargv(char **av, int count, char **paths)
 		}
 		c = get_next_c(av[count + 2], c);
 	}
-	newargv = assign_last(newargv, av[1], count, n);
+	newargv[n] = 0;
 	return (newargv);
 }
 
